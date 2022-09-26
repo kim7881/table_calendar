@@ -36,6 +36,7 @@ class Calendar extends StatelessWidget {
       daysOfWeekHeight: 40.0,
       headerStyle: const HeaderStyle(
         formatButtonVisible: false,
+        headerPadding: EdgeInsets.symmetric(horizontal: 100),
         titleCentered: true,
         titleTextStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: 16.0),
       ),
