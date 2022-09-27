@@ -1,5 +1,14 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import 'event.dart';
+
+class Event {
+  final DateTime date ;
+  Event({required this.date});
+}
 
 class Calendar extends StatelessWidget {
   final DateTime? selectedDay;
@@ -15,6 +24,7 @@ class Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final defaultBoxDeco = BoxDecoration(
       border: Border.all(
         width: 0.5,
@@ -28,6 +38,7 @@ class Calendar extends StatelessWidget {
     );
 
     return TableCalendar(
+
       rowHeight: 70.0,
       locale: 'ko_KR',
       focusedDay: focusedDay,
@@ -56,6 +67,11 @@ class Calendar extends StatelessWidget {
         defaultTextStyle: textStyle,
         weekendTextStyle: textStyle.copyWith(color: Colors.blue),
         outsideTextStyle: textStyle.copyWith(fontSize: 13.0),
+        markerDecoration: BoxDecoration(
+          color: Colors.green,
+        ),
+        markerSize: 20,
+        markersAlignment: Alignment.bottomCenter,
       ),
       calendarBuilders: CalendarBuilders(
         dowBuilder: (context, day) {
@@ -88,7 +104,23 @@ class Calendar extends StatelessWidget {
             );
           }
         },
+        // markerBuilder: (context, day, events) {
+        //   if(day.day == 7){
+        //     return Container(
+        //       child: Positioned(
+        //         bottom: 1,
+        //         child: ,
+        //       ),
+        //     );
+        //   }
+        // },
       ),
+      eventLoader: (day) {
+        if(day.day == 7 || day.day == 8 || day.day == 9){
+          return ['hi'];
+        }
+        return [];
+      },
       onDaySelected: onDaySelected,
       selectedDayPredicate: (DateTime date) {
         if (selectedDay == null) {
