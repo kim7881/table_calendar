@@ -1,14 +1,5 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-
-import 'event.dart';
-
-class Event {
-  final DateTime date ;
-  Event({required this.date});
-}
 
 class Calendar extends StatelessWidget {
   final DateTime? selectedDay;
@@ -38,7 +29,6 @@ class Calendar extends StatelessWidget {
     );
 
     return TableCalendar(
-
       rowHeight: 70.0,
       locale: 'ko_KR',
       focusedDay: focusedDay,
@@ -47,7 +37,7 @@ class Calendar extends StatelessWidget {
       daysOfWeekHeight: 40.0,
       headerStyle: const HeaderStyle(
         formatButtonVisible: false,
-        headerPadding: EdgeInsets.symmetric(horizontal: 100),
+        headerPadding: EdgeInsets.symmetric(horizontal: 60),
         titleCentered: true,
         titleTextStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: 16.0),
       ),
@@ -104,16 +94,14 @@ class Calendar extends StatelessWidget {
             );
           }
         },
-        // markerBuilder: (context, day, events) {
-        //   if(day.day == 7){
-        //     return Container(
-        //       child: Positioned(
-        //         bottom: 1,
-        //         child: ,
-        //       ),
-        //     );
-        //   }
-        // },
+        markerBuilder: (context, day, events) {
+          if(day.day == 7 || day.day == 8 || day.day == 9){
+            return Positioned(
+              bottom: 5,
+              child: Text('1,350,000',style: TextStyle(fontSize: 11),),
+            );
+          }
+        },
       ),
       eventLoader: (day) {
         if(day.day == 7 || day.day == 8 || day.day == 9){
